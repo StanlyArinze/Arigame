@@ -45,10 +45,11 @@ A aplicação apresenta:
 3. Clique nas miniaturas de tema para alternar entre os estilos.
 
 ## 📸 Capturas de Tela
-*(Adicione imagens/gifs mostrando os temas e transições)*
+<img width="1224" height="718" alt="image" src="https://github.com/user-attachments/assets/642e5d43-55c4-4b38-ab95-6bcfad200f9f" />
+<img width="1296" height="784" alt="image" src="https://github.com/user-attachments/assets/e8631ee6-4fca-4520-b5dd-8f5285385bc4" />
+
 
 ## 📄 Licença
 Este projeto está sob a licença MIT. Sinta-se livre para usá-lo e modificá-lo conforme necessário.
 
 ---
-💡 **Dica:** Personalize as cores, imagens e transições no `style.css` para adaptar este projeto à identidade visual desejada.
