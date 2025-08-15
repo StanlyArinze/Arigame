@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Arigame — Temas</title>
+  <meta name="description" content="Arigame — temas com transição suave de fundo e personagem colado à base do card. Texto sempre sobreposto ao background." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true"><i class="bi bi-emoji-smile"></i></div>
+        <h1>Arigame</h1>
+      </div>
+      <nav aria-label="Navegação principal">
+        <ul>
+          <li><a href="#">Catálogo</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Wiki</a></li>
+          <li><a href="#">Comunidade</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="canvas" aria-label="Seção de destaque">
+      <!-- fundos para crossfade -->
+      <div class="bg-stack">
+        <div class="bg bg-a is-active" style="background-image:url('naipe.png')"></div>
+        <div class="bg bg-b" style="background-image:url('naipe.png')"></div>
+      </div>
+      <div class="grain" aria-hidden="true"></div>
+      <div class="overlay" aria-hidden="true"></div>
+
+      <div class="float-tools" aria-label="Atalhos">
+        <button type="button" title="Início" aria-label="Ir para o início"><i class="bi bi-house"></i></button>
+        <button type="button" title="Buscar" aria-label="Abrir busca"><i class="bi bi-search"></i></button>
+        <button type="button" title="Favoritos" aria-label="Ver favoritos"><i class="bi bi-heart"></i></button>
+        <button type="button" title="Configurações" aria-label="Abrir configurações"><i class="bi bi-gear"></i></button>
+      </div>
+
+      <div class="grid">
+        <div class="lede">
+          <h2>Bem vindo ao Arigame</h2>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+          <div class="badge-list" role="list" aria-label="Informações rápidas">
+            <span class="badge" role="listitem"><i class="bi bi-play-fill" aria-hidden="true"></i> Mais imagens</span>
+            <span class="badge" role="listitem"><i class="bi bi-calendar-event" aria-hidden="true"></i> Destaques</span>
+          </div>
+          <div style="margin-top:22px"><button class="cta" type="button" aria-label="Explorar agora"><i class="bi bi-arrow-right" aria-hidden="true"></i> Ver catálogo</button></div>
+        </div>
+
+        <div class="hero">
+          <div class="art-stage">
+            <img class="char" alt="personagem" src="imagemA.png" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="themes" role="group" aria-label="Alternar tema">
+      <span class="label">Temas:</span>
+      <button class="swatch" data-theme="arigame" title="Naipe + imagemA">
+        <i style="--bg:linear-gradient(135deg,#151515,#ffa72b,#ffd84d);"></i>
+      </button>
+      <button class="swatch" data-theme="neon" title="Cruz + imagemP">
+        <i style="--bg:linear-gradient(135deg,#0b0b0b,#3a3a3a,#ff3b3b);"></i>
+      </button>
+      <button class="swatch" data-theme="primavera" title="Star + imagemR">
+        <i style="--bg:linear-gradient(135deg,#5d4cff,#ff6fb0,#5bd0ff);"></i>
+      </button>
+    </div>
+
+    <footer>© 2025 Stanly Dim. Todos os direitos reservados. — Portfólio.</footer>
+  </div>
+
+  <script>
+    const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* Mapa dos temas (mantendo teu padrão e nomes de arquivos):
+       1) arigame: fundo = naipe.png | personagem = imagemA.png
+       2) neon:    fundo = cruz.png  | personagem = imagemP.png
+       3) primavera: fundo = star.png | personagem = imagemR.png
+    */
+    const THEMES = {
+      arigame: {
+        css: { '--bg':'#0b0b0b', '--text':'#ffffff', '--muted':'#bfbfbf', '--accent':'#ffa72b', '--accent-2':'#ffd84d', '--card':'#111111', '--overlay-strength': .35 },
+        character: 'imagemA.png',
+        sakura: 'naipe.png'
+      },
+      neon: {
+        css: { '--bg':'#0b0b0b', '--text':'#ffffff', '--muted':'#bfbfbf', '--accent':'#ff3b3b', '--accent-2':'#3a3a3a', '--card':'#141414', '--overlay-strength': .38 },
+        character: 'imagemP.png',
+        sakura: 'cruz.png'
+      },
+      primavera: {
+        css: { '--bg':'#0b0b0b', '--text':'#ffffff', '--muted':'#e6e6ff', '--accent':'#ff6fb0', '--accent-2':'#5bd0ff', '--card':'#1a1640cc', '--overlay-strength': .40 },
+        character: 'imagemR.png',
+        sakura: 'star.png'
+      }
+    };
+
+    const r = document.documentElement;
+    const char = document.querySelector('.char');
+
+    // Crossfade de fundo com duas camadas alternando
+    const bgA = document.querySelector('.bg-a');
+    const bgB = document.querySelector('.bg-b');
+    let activeIsA = true; // controla qual está no topo
+
+    function setVars(vars){ for (const [k,v] of Object.entries(vars)) r.style.setProperty(k, v); }
+
+    function preload(src){
+      return new Promise(resolve => { if (!src) return resolve(); const img = new Image(); img.onload = img.onerror = () => resolve(); img.src = src; });
+    }
+
+    async function swapBackground(newUrl){
+      const top = activeIsA ? bgB : bgA; // a próxima camada
+      const bottom = activeIsA ? bgA : bgB;
+      top.style.backgroundImage = `url('${newUrl}')`;
+      await preload(newUrl);
+      // traz a próxima camada e esmaece a anterior
+      top.classList.add('is-active');
+      bottom.classList.remove('is-active');
+      activeIsA = !activeIsA;
+    }
+
+    async function fadeSwapImg(imgEl, newSrc){
+      if (!newSrc){ imgEl.style.visibility = 'hidden'; imgEl.src = ''; return; }
+      await preload(newSrc);
+      if (!REDUCED_MOTION) { imgEl.style.opacity = 0; imgEl.style.transform = 'translateX(-50%) translateY(2px)'; }
+      await new Promise(r => setTimeout(r, REDUCED_MOTION ? 0 : 90));
+      imgEl.src = newSrc; imgEl.style.visibility = 'visible';
+      requestAnimationFrame(()=>{ if (!REDUCED_MOTION) { imgEl.style.opacity = 1; imgEl.style.transform = 'translateX(-50%) translateY(0)'; } });
+    }
+
+    async function applyTheme(key, {persist=true} = {}){
+      const t = THEMES[key]; if (!t) return;
+      setVars(t.css);
+      await Promise.all([ swapBackground(t.sakura), fadeSwapImg(char, t.character) ]);
+      if (persist) { try { localStorage.setItem('arigame_theme', key); } catch {} }
+    }
+
+    // Interações
+    document.querySelectorAll('.swatch').forEach(btn=>{
+      btn.addEventListener('click', ()=>applyTheme(btn.dataset.theme));
+      btn.addEventListener('keydown', (e)=>{ if (e.key==='Enter'||e.key===' '){ e.preventDefault(); applyTheme(btn.dataset.theme);} });
+    });
+
+    // Restaura último tema e aplica animação de entrada
+    const saved = (()=>{ try { return localStorage.getItem('arigame_theme'); } catch { return null } })();
+    applyTheme(saved && THEMES[saved] ? saved : 'arigame', {persist:false});
+  </script>
+</body>
+</html>
