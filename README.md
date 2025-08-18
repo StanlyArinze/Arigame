@@ -39,7 +39,7 @@ A aplicação apresenta:
 ## 🚀 Como Executar
 1. Clone este repositório:
    ```bash
-   git clone https://github.com/seu-usuario/arigame-temas.git
+   git clone https://github.com/StanlyArinze/Arigame
    ```
 2. Abra o arquivo `index.html` em seu navegador preferido.
 3. Clique nas miniaturas de tema para alternar entre os estilos.
